@@ -7,13 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GetFieldOfTaskListener implements TaskListener {
-  
-  private static final long serialVersionUID = 1L;
-  private Expression name;
 
-  @Override
-  public void notify(DelegateTask delegateTask) {
-    System.out.println(name.getValue(delegateTask));
-  }
+    private static final long serialVersionUID = 1L;
+    private Expression name;
+
+    @Override
+    public void notify(DelegateTask delegateTask) {
+        System.out.println(name.getValue(delegateTask));
+    }
 
 }

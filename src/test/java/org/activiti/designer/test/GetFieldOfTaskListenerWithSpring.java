@@ -8,18 +8,18 @@ import org.springframework.test.context.ContextConfiguration;
 
 @ContextConfiguration("classpath:applicationContext-test.xml")
 public class GetFieldOfTaskListenerWithSpring extends SpringActivitiTestCase {
-  
-  @Autowired
-  RuntimeService runtimeService;
-  
-  @Autowired
-  RepositoryService repositoryService;
 
-//  @Deployment(resources = "diagrams/qun/GetFieldOfTaskListener.bpmn")
-  public void testField() {
-    long count = repositoryService.createProcessDefinitionQuery().count();
-    assertEquals(2, count);
-//    runtimeService.startProcessInstanceByKey("GetFieldOfTaskListener");
-  }
+    @Autowired
+    RuntimeService runtimeService;
+
+    @Autowired
+    RepositoryService repositoryService;
+
+    @org.activiti.engine.test.Deployment(resources = "diagrams/qun/GetFieldOfTaskListener.bpmn")
+    public void testField() {
+        long count = repositoryService.createProcessDefinitionQuery().count();
+        assertEquals(3, count);
+        //    runtimeService.startProcessInstanceByKey("GetFieldOfTaskListener");
+    }
 
 }

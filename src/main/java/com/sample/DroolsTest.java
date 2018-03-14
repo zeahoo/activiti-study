@@ -42,7 +42,7 @@ public class DroolsTest {
         kbuilder.add(ResourceFactory.newClassPathResource("rules/hello.drl"), ResourceType.DRL);
         KnowledgeBuilderErrors errors = kbuilder.getErrors();
         if (errors.size() > 0) {
-            for (KnowledgeBuilderError error: errors) {
+            for (KnowledgeBuilderError error : errors) {
                 System.err.println(error);
             }
             throw new IllegalArgumentException("Could not parse knowledge.");
@@ -57,8 +57,8 @@ public class DroolsTest {
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
-		public static final int HELLO = 0;
+        private static final long serialVersionUID = 1L;
+        public static final int HELLO = 0;
         public static final int GOODBYE = 1;
 
         private String message;

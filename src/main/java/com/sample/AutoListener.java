@@ -7,12 +7,13 @@ import org.activiti.engine.delegate.ExecutionListener;
 
 public class AutoListener implements ExecutionListener {
 
-	@Override
-	public void notify(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
-		EngineServices engineServices = execution.getEngineServices();
-		RuntimeService runtimeService = engineServices.getRuntimeService();
-		runtimeService.signal(execution.getId());
-	}
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public void notify(DelegateExecution execution) throws Exception {
+        EngineServices engineServices = execution.getEngineServices();
+        RuntimeService runtimeService = engineServices.getRuntimeService();
+        runtimeService.signal(execution.getId());
+    }
 
 }

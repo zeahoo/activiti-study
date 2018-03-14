@@ -6,10 +6,10 @@ import org.activiti.engine.delegate.JavaDelegate;
 
 public class ErrorBoundaryEventAttachToTaskService implements JavaDelegate {
 
-	@Override
-	public void execute(DelegateExecution execution) throws Exception {
-		// TODO throw error for error boundary event
-		throw new BpmnError("errorOne");
-	}
+    @Override
+    public void execute(DelegateExecution execution) throws Exception {
+        // TODO throw error for error boundary event
+        throw new BpmnError("errorOne");
+    }
 
 }

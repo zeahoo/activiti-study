@@ -11,14 +11,16 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 public class CreateUserTaskListener implements TaskListener {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  /* (non-Javadoc)
-	 * @see org.activiti.engine.delegate.TaskListener#notify(org.activiti.engine.delegate.DelegateTask)
-	 */
-	@Override
-	public void notify(DelegateTask delegateTask) {
-		System.out.println("CreateUserTaskListener" + ToStringBuilder.reflectionToString(delegateTask));
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.activiti.engine.delegate.TaskListener#notify(org.activiti.engine.delegate.DelegateTask)
+     */
+    @Override
+    public void notify(DelegateTask delegateTask) {
+        System.out.println("CreateUserTaskListener" + ToStringBuilder.reflectionToString(delegateTask));
+    }
 
 }

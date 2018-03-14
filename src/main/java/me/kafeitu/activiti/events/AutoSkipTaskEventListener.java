@@ -30,8 +30,7 @@ public class AutoSkipTaskEventListener implements ActivitiEventListener {
 
     @Override
     public void onEvent(ActivitiEvent event) {
-        if (event.getType().equals(ActivitiEventType.TASK_CREATED)
-                || event.getType().equals(ActivitiEventType.TASK_ASSIGNED)) {
+        if (event.getType().equals(ActivitiEventType.TASK_CREATED) || event.getType().equals(ActivitiEventType.TASK_ASSIGNED)) {
             ActivitiEntityEvent entityEvent = (ActivitiEntityEvent) event;
 
             Object entity = entityEvent.getEntity();
@@ -113,7 +112,7 @@ public class AutoSkipTaskEventListener implements ActivitiEventListener {
         taskService.addComment(taskEntity.getId(), taskEntity.getProcessInstanceId(), "自动跳过");
 
         // 执行命令，直接完成当前任务
-//        System.out.println("准备跳过任务：" + taskEntity.getName() + "-->" + taskDefinitionKey);
+        //        System.out.println("准备跳过任务：" + taskEntity.getName() + "-->" + taskDefinitionKey);
         managementService.executeCommand(command);
         System.out.println("已跳过任务：" + taskEntity.getName() + "-->" + taskDefinitionKey);
 

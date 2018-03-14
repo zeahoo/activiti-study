@@ -24,48 +24,48 @@ import org.junit.Test;
  */
 public class ProcessTestDelegateTask {
 
-	@Rule
-	public ActivitiRule activitiRule = new ActivitiRule();
+    @Rule
+    public ActivitiRule activitiRule = new ActivitiRule();
 
-	@Test
-	@Deployment(resources = { "diagrams/AutoAssignee.bpmn" })
-	public void startProcess() throws Exception {
-		RuntimeService runtimeService = activitiRule.getRuntimeService();
-		Map<String, Object> variableMap = new HashMap<String, Object>();
-		variableMap.put("name", "Activiti");
-		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("AutoAssignee", variableMap);
-		assertNotNull(processInstance.getId());
-		System.out.println("id " + processInstance.getId() + " " + processInstance.getProcessDefinitionId());
+    @Test
+    @Deployment(resources = { "diagrams/AutoAssignee.bpmn" })
+    public void startProcess() throws Exception {
+        RuntimeService runtimeService = activitiRule.getRuntimeService();
+        Map<String, Object> variableMap = new HashMap<String, Object>();
+        variableMap.put("name", "Activiti");
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("AutoAssignee", variableMap);
+        assertNotNull(processInstance.getId());
+        System.out.println("id " + processInstance.getId() + " " + processInstance.getProcessDefinitionId());
 
-		TaskService taskService = activitiRule.getTaskService();
+        TaskService taskService = activitiRule.getTaskService();
 
-		Task task = taskService.createTaskQuery().singleResult();
-		assertNull(task.getAssignee());
+        Task task = taskService.createTaskQuery().singleResult();
+        assertNull(task.getAssignee());
 
-		// 签收
-		taskService.claim(task.getId(), "user1");
-		task = taskService.createTaskQuery().singleResult();
-		assertNull(task.getOwner());
-		assertNotNull(task.getAssignee());
+        // 签收
+        taskService.claim(task.getId(), "user1");
+        task = taskService.createTaskQuery().singleResult();
+        assertNull(task.getOwner());
+        assertNotNull(task.getAssignee());
 
-		// 委派
-		taskService.delegateTask(task.getId(), "henryyan");
-		
-		task = taskService.createTaskQuery().singleResult();
-		assertEquals("user1", task.getOwner());
+        // 委派
+        taskService.delegateTask(task.getId(), "henryyan");
 
-		// 查询被委派的任务
-		task = taskService.createTaskQuery().taskAssignee("henryyan").taskDelegationState(DelegationState.PENDING).singleResult();
-		assertNotNull(task);
+        task = taskService.createTaskQuery().singleResult();
+        assertEquals("user1", task.getOwner());
 
-		// 被委派人完成任务
-		taskService.resolveTask(task.getId());
-		
-		// 查询已完成的委派任务
-		task = taskService.createTaskQuery().taskDelegationState(DelegationState.RESOLVED).singleResult();
-		assertNotNull(task);
-		assertEquals("user1", task.getAssignee());
-		assertEquals("user1", task.getOwner());
-		//		taskService.complete(task.getId(), Collections.singletonMap("taskTwoAssignee", "user2"));
-	}
+        // 查询被委派的任务
+        task = taskService.createTaskQuery().taskAssignee("henryyan").taskDelegationState(DelegationState.PENDING).singleResult();
+        assertNotNull(task);
+
+        // 被委派人完成任务
+        taskService.resolveTask(task.getId());
+
+        // 查询已完成的委派任务
+        task = taskService.createTaskQuery().taskDelegationState(DelegationState.RESOLVED).singleResult();
+        assertNotNull(task);
+        assertEquals("user1", task.getAssignee());
+        assertEquals("user1", task.getOwner());
+        //		taskService.complete(task.getId(), Collections.singletonMap("taskTwoAssignee", "user2"));
+    }
 }

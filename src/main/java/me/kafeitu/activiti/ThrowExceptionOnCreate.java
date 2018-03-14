@@ -10,12 +10,12 @@ import org.activiti.engine.delegate.TaskListener;
  */
 public class ThrowExceptionOnCreate implements TaskListener {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  @Override
-	public void notify(DelegateTask delegateTask) {
-		System.out.println("啊哈哈");
-		throw new RuntimeException("故意的");
-	}
+    @Override
+    public void notify(DelegateTask delegateTask) {
+        System.out.println("啊哈哈");
+        throw new RuntimeException("故意的");
+    }
 
 }

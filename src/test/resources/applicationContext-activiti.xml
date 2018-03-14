@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-	#%L
-	Linux车道收费系统项目 车道核心收费
-	%%
-	Copyright (C) 2013 安徽皖通科技股份有限公司
-	%%
-	All rights reserved
-	#L%
--->
 
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
@@ -30,7 +21,17 @@
 		<property name="transactionManager" ref="activitiTransactionManager" />
 		<property name="databaseSchemaUpdate" value="true" />
 		<property name="jobExecutorActivate" value="true" />
-		<property name="deploymentResources" value="classpath*:/qun/innocent.y/test.bpmn" />
+<!-- 		<property name="deploymentResources" value="classpath*:/diagrams/qun/innocent.y/test.bpmn" /> -->
+		<property name="deploymentResources">
+			<list>
+				<value>classpath:/diagrams/qun/innocent.y/test.bpmn
+				</value>
+				<value>classpath:/diagrams/qun/innocent.y/test01.bpmn
+				</value>
+				<value>classpath:/diagrams/qun/innocent.y/test02.bpmn
+				</value>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
